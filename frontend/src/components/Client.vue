@@ -2,20 +2,6 @@
     <lay-container>
         <lay-row space="20">
             <lay-col md="12">
-                <lay-row space="10">
-                    <lay-col md="16">
-                        <div class="ws">ws://</div>
-                        <lay-input v-model="addr" class="addr"></lay-input>
-                    </lay-col>
-                    <lay-col md="4">
-                        <lay-ripple>
-                            <lay-button :type="status?'danger':'primary'" @click="start">{{
-                                    status ? "断开" : "连接"
-                                }}
-                            </lay-button>
-                        </lay-ripple>
-                    </lay-col>
-                </lay-row>
                 <div class="msg">
                     <div v-for="msg in messages" style="margin-top:5px;">
                         <div class="msg-user">{{ msg.name }} :</div>
@@ -24,10 +10,29 @@
                 </div>
             </lay-col>
             <lay-col md="12" class="right">
-                <lay-textarea placeholder="请输入发送的内容" v-model="sendData" style="resize: none"></lay-textarea>
-                <div style="margin-top:10px;text-align: right;">
-                    <lay-button type="normal" @click="send">发送</lay-button>
+                <div>
+                    <lay-row space="10">
+                        <lay-col md="16">
+                            <div class="ws">ws://</div>
+                            <lay-input v-model="addr" class="addr"></lay-input>
+                        </lay-col>
+                        <lay-col md="4">
+                            <lay-ripple>
+                                <lay-button :type="status?'danger':'primary'" @click="start">{{
+                                        status ? "断开" : "连接"
+                                    }}
+                                </lay-button>
+                            </lay-ripple>
+                        </lay-col>
+                    </lay-row>
                 </div>
+                <div>
+                    <lay-textarea placeholder="请输入发送的内容" v-model="sendData" style="resize: none"></lay-textarea>
+                    <div style="margin-top:10px;text-align: right;">
+                        <lay-button type="normal" @click="send">发送</lay-button>
+                    </div>
+                </div>
+               
             </lay-col>
         </lay-row>
     </lay-container>
@@ -92,7 +97,6 @@ const send = () => {
 <style scoped>
 .ws {
     width: 30px;
-    //border:1px solid red;
     padding: 11px 0;
     position: absolute;
     left: 15px;
@@ -105,13 +109,13 @@ const send = () => {
 .right {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     height: 90vh;
 
 }
 
 .msg {
-    height: calc(85vh - 50px);
+    height: calc(90vh - 50px);
     padding: 8px;
     width: 100%;
     overflow: auto;
