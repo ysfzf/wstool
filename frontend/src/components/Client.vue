@@ -57,7 +57,7 @@ const start = () => {
         ws.onmessage =  (e) =>{
             //当客户端收到服务端发来的消息时，触发onmessage事件，参数e.data包含server传递过来的数据
             LogPrint(e.data);
-            messages.value.push({name: "服务器", msg: e.data})
+            messages.value.unshift({name: "服务器", msg: e.data})
         }
         ws.onclose = (e) =>{
             //当客户端收到服务端发送的关闭连接请求时，触发onclose事件
@@ -83,7 +83,7 @@ const send = () => {
     if (data !== "") {
         if(ws!==undefined){
             ws.send(data)
-            messages.value.push({name: "我", msg: data})
+            messages.value.unshift({name: "我", msg: data})
         }else{
             ShowErrDialog("还没有连接到服务端")
         }

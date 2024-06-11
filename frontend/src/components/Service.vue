@@ -41,7 +41,7 @@
 import {reactive, ref} from 'vue'
     import {Start, Stop, Status, SendMsg, All} from "../../wailsjs/go/main/App.js";
     import {EventsOn, LogPrint} from "../../wailsjs/runtime/runtime.js";
-    const port=ref(9527)
+    const port=ref(9000)
     const status=ref(false)
     const sendData=ref("")
     const users=ref([])
@@ -71,7 +71,8 @@ import {reactive, ref} from 'vue'
          })
     })
     EventsOn("ws_message",(name,msg)=>{
-        messages.value.push({name,msg})
+        console.log(messages.value)
+        messages.value.unshift({name,msg})
     })
     EventsOn("ws_close",()=>{
         All().then(all=>{
@@ -97,7 +98,7 @@ import {reactive, ref} from 'vue'
         let data=sendData.value.trim()
         if(data!==""){
             SendMsg(sendUsers.value,data).then(()=>{
-                messages.value.push({name:"服务器",msg:data})
+                messages.value.unshift({name:"服务器",msg:data})
             })
         }
     }
